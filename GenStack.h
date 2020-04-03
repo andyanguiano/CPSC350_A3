@@ -3,7 +3,6 @@
 using namespace std;
 
 template <class T>
-
 class GenStack{
   public:
     GenStack();//default constructor
@@ -18,6 +17,8 @@ class GenStack{
     T peek(); // aka top
     bool isEmpty();
     bool isFull();
+    int getSize();
+    GenStack *allocateMemory();
 
     int top;
     int mSize;
@@ -76,4 +77,17 @@ bool GenStack<T>::isFull(){
 template <class T>
 bool GenStack<T>::isEmpty(){
   return (top == -1);
+}
+
+template <class T>
+int GenStack<T>::getSize(){
+  return mSize;
+}
+
+//doubles teh memory allowed
+template <class T>
+GenStack<T>* GenStack<T>::allocateMemory(){
+  int size = mSize * 2;
+  GenStack<T> *array = new GenStack<T>(size);
+  return array;
 }

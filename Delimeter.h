@@ -4,7 +4,6 @@
 using namespace std;
 
 template <class T>
-
 class Delimeter{
   public:
     Delimeter();//constructor

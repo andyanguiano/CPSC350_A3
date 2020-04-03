@@ -11,9 +11,13 @@ int main(int argc, char **argv){
       delim = fileIO->ReadFile(file);
       again = fileIO->getAgainCheck();
       delete fileIO;
-
-      cout << "Enter the next file name: ";
-      cin >> file;
+      if(again == 'y'){
+        cout << "Enter the next file name: ";
+        cin >> file;
+        continue;
+      }else{
+        break;
+      }
     }else{
       cout << "Enter the file name when compiling the program." << endl;
       return 0;

@@ -47,6 +47,7 @@ string FileIO<T>::ReadFile(string file){
   while(!infs.eof()){
     if(!infs.fail()){
       while(getline(infs, line)){
+        lineCount += 1;
         for(int i = 0; i < line.size(); ++i){
 
           if(m_delimCount == stackSize - 1){
@@ -54,62 +55,47 @@ string FileIO<T>::ReadFile(string file){
             stack = stack->allocateMemory();
             stackSize = stack->getSize();
           }
+
           if(line.at(i) == '('){
             delimStr.push_back('(');
             m_delimCount += 1;
+            delimPosition[delimError] = lineCount;
+            delimError += 1;
           }else if(line.at(i) == ')'){
               delimStr.push_back(')');
               m_delimCount += 1;
+              delimPosition[delimError] = lineCount;
+              delimError += 1;
           }else if(line.at(i) == '{'){
               delimStr.push_back('{');
               m_delimCount += 1;
+              delimPosition[delimError] = lineCount;
+              delimError += 1;
           }else if(line.at(i) == '}'){
               delimStr.push_back('}');
               m_delimCount += 1;
+              delimPosition[delimError] = lineCount;
+              delimError += 1;
           }else if(line.at(i) == '['){
+              delimStr.push_back('[');
+              m_delimCount += 1;
+              delimPosition[delimError] = lineCount;
+              delimError += 1;
+          }else if(line.at(i) == ']'){
               delimStr.push_back(']');
               m_delimCount += 1;
+              delimPosition[delimError] = lineCount;
+              delimError += 1;
           }
         }
       }
     }
     infs.close();
+    Delimeter<T> *delimeter = new Delimeter<T>();
+    m_againCheck = delimeter->Checker(stack, delimStr, delimPosition, m_delimCount);
+    return delimStr;
+    break;
   }
-
-  infs.open(file);
-  while(!infs.eof()){
-    if(!infs.fail()){
-      while(getline(infs, line)){
-        lineCount += 1;
-        for(int i = 0; i < line.size(); ++i){
-          if(line.at(i) = '('){
-            delimPosition[delimError] = lineCount;
-            delimError += 1;
-          }else if(line.at(i) = ')'){
-            delimPosition[delimError] = lineCount;
-            delimError += 1;
-          }else if(line.at(i) = '{'){
-            delimPosition[delimError] = lineCount;
-            delimError += 1;
-          }else if(line.at(i) = '}'){
-            delimPosition[delimError] = lineCount;
-            delimError += 1;
-          }else if(line.at(i) = '['){
-            delimPosition[delimError] = lineCount;
-            delimError += 1;
-          }else if(line.at(i) = ']'){
-            delimPosition[delimError] = lineCount;
-            delimError += 1;
-          }
-        }
-      }
-    }
-    infs.close();
-  }
-
-  Delimeter<T> *delimeter = new Delimeter<T>();
-  m_againCheck = delimeter->Checker(stack, delimStr, delimPosition, m_delimCount);
-  return delimStr;
 }
 
 template <class T>

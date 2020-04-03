@@ -59,7 +59,6 @@ template <class T>
 T GenStack<T>::pop(){
   //check is full empty attempting to remove
   if(isEmpty()){
-    cout << "Stack is already empty";
     return '\0';
   }else{
   return myArray[top--];

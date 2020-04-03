@@ -49,17 +49,32 @@ char Delimeter<T>::Checker(GenStack<T>* stack, string line, int* delimPosition, 
       m_topElement = stack->pop();
       if(m_topElement == '('){
         m_expectedChar = ')';
+        if(m_expectedChar != m_current){
+          m_posError = delimPosition[i];
+          cout << "Line: " << m_posError << " expected " << m_expectedChar << " and found " << m_current << endl;
+          m_check = true;
+        }else{
+          continue;
+        }
       }else if(m_topElement == '{'){
         m_expectedChar = '}';
+        if(m_expectedChar != m_current){
+          m_posError = delimPosition[i];
+          cout << "Line: " << m_posError << " expected " << m_expectedChar << " and found " << m_current << endl;
+          m_check = true;
+        }else{
+          continue;
+        }
       }else{
         m_expectedChar = ']';
+        if(m_expectedChar != m_current){
+          m_posError = delimPosition[i];
+          cout << "Line: " << m_posError << " expected " << m_expectedChar << " and found " << m_current << endl;
+          m_check = true;
+        }else{
+          continue;
+        }
       }
-    }
-
-    if(m_expectedChar != m_current){
-      m_posError = delimPosition[i];
-      cout << "Line: " << m_posError << " expected " << m_expectedChar << " and found " << m_current << endl;
-      m_check = true;
     }
   }
 
@@ -68,4 +83,5 @@ char Delimeter<T>::Checker(GenStack<T>* stack, string line, int* delimPosition, 
     cout << "Would you ike to check another file? (y/n): ";
     cin >> m_again;
   }
+  return m_again;
 }

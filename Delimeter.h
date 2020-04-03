@@ -9,7 +9,7 @@ class Delimeter{
     Delimeter();//constructor
     ~Delimeter();//destructor
 
-    char Checker(GenStack<T> stack, string line, int* delimPosition, int delimCount);
+    char Checker(GenStack<T>* stack, string line, int* delimPosition, int delimCount);
 
   private:
     bool m_check; //check for errors
@@ -37,7 +37,7 @@ Delimeter<T>::~Delimeter(){
 }
 
 template <class T>
-char Delimeter<T>::Checker(GenStack<T> stack, string line, int* delimPosition, int delimCount){
+char Delimeter<T>::Checker(GenStack<T>* stack, string line, int* delimPosition, int delimCount){
 
   for(int i = 0; i < delimCount; ++i){
     m_current = line[i];

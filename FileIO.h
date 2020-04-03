@@ -40,9 +40,9 @@ string FileIO<T>::ReadFile(string file){
     cout << "Could not open file." << endl;
   }
 
-  GenStack<T> *stack = new GenStack<T>(m_delimCount);
+  GenStack<T> *stack = new GenStack<T>();
   int stackSize = stack->getSize();
-  int *delimPosition = new int[m_delimCount];
+  int *delimPosition = new int[stackSize];
 
   while(!infs.eof()){
     if(!infs.fail()){

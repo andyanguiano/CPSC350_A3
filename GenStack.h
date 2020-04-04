@@ -1,8 +1,16 @@
+//Andy Anguiano
+//2316199
+//aanguiano@champman.edu
+//CPSC 350-02
+//Assignemnt 3
+
 #include <iostream>
 
 using namespace std;
 
+//templates allow to use of any data type
 template <class T>
+//reuasabel code for stack of any data type
 class GenStack{
   public:
     GenStack();//default constructor
@@ -15,13 +23,13 @@ class GenStack{
 
     //aux/helper functions
     T peek(); // aka top
-    bool isEmpty();
-    bool isFull();
-    int getSize();
-    GenStack *allocateMemory();
+    bool isEmpty();//checks if stack is empty
+    bool isFull();//checks is stack is full
+    int getSize();//returns size of stack
+    GenStack *allocateMemory();//when a stack is full, returns a larger stack
 
-    int top;
-    int mSize;
+    int top;//holds the value for the top of the stack
+    int mSize;//holds the value of the size
 
     T *myArray; //memory address of the fisrt block
 
@@ -83,7 +91,7 @@ int GenStack<T>::getSize(){
   return mSize;
 }
 
-//doubles teh memory allowed
+//doubles the memory of stack
 template <class T>
 GenStack<T>* GenStack<T>::allocateMemory(){
   int size = mSize * 2;
